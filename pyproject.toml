@@ -3,5 +3,12 @@ name = "tp-multithreading"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.12"
-dependencies = []
+requires-python = ">=3.7"
+dependencies = [
+    "numpy>=1.21.6",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=2.21.0",
+]
