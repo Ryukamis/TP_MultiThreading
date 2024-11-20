@@ -1,0 +1,12 @@
+name: ci
+
+jobs:
+  uv-example:
+    name: python
+    runs-on: windows
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: uv run python -m unittest
