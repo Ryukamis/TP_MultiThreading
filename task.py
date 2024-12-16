@@ -36,7 +36,6 @@ class Task:
             }
         )
 
-    @classmethod
     def from_json(cls, json_str: str) -> "Task":
         obj = json.loads(json_str)
         task = Task("x")
