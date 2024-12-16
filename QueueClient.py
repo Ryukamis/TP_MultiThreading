@@ -1,11 +1,25 @@
 from multiprocessing.managers import BaseManager
 import QueueManager
 
-class Queue_Client:
+from task import Task
+
+
+class QueueClient:
     def __init__(self):
+        self.qm = QueueManager("localhost", 50000, b"abc123")
+        self.qm.connect()
 
-        QueueManager.register('get_Taskqueue')  
-        QueueManager.register('get_Resultqueue')  
-        m = QueueManager(address=('foo.bar.org', 50000), authkey=b'abracadabra')
+        self.qm.register("get_task_queue")
+        self.qm.register("get_result_queue")
 
-        m.connect()
+        self.task_queue: mp.Queue = self.qm.get_task_queue()
+        self.result_queue: mp.Queue = self.qm.get_result_queue()
+
+    def get_task(self, queue: mp.Queue):
+        item = queue.get()
+        return item if isinstance(item, Task) else None
+
+
+if __name__ == "__main__":
+    qc = QueueClient()
+    print(qc.task_queue)
